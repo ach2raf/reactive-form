@@ -1,0 +1,125 @@
+<div class="min-vh-100 bg-light d-flex align-items-center justify-content-center p-3 p-md-5">
+  <div class="card border-0 shadow-sm w-100 rounded-4 overflow-hidden" style="max-width: 760px;">
+    
+    <div class="card-header bg-white border-bottom p-4 p-md-5">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="badge bg-primary text-white rounded-pill px-3 py-2 fw-medium">
+          NUEVA PUBLICACIÓN
+        </span>
+       
+      </div>
+      <h1 class="h3 fw-bold text-black mb-1">Crear entrada en el blog</h1>
+    </div>
+
+    <div class="card-body bg-white p-4 p-md-5">
+      <form (ngSubmit)="onSubmit()" class="row g-4">
+
+        <div class="col-12">
+          <label for="title" class="form-label fw-bold text-dark small text-uppercase">
+            Título
+          </label>
+          <input 
+            id="title" 
+            type="text" 
+            class="form-control form-control-lg rounded-3 fs-6 custom-placeholder" 
+            placeholder="Escribe el título de la publicación..." 
+            [formControl]="title" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="category" class="form-label fw-bold text-dark small text-uppercase">
+            Categoría
+          </label>
+          <select id="category" class="form-select form-select-lg rounded-3 fs-6 custom-placeholder" [formControl]="category">
+            <option value="">Seleccionar categoría...</option>
+            @for (c of categories; track c) {
+              <option [value]="c">{{ c }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="email" class="form-label fw-bold text-dark small text-uppercase">
+            Correo del autor
+          </label>
+          <input 
+            id="email" 
+            type="email" 
+            class="form-control form-control-lg rounded-3 fs-6 custom-placeholder" 
+            placeholder="nombre@ejemplo.com" 
+            [formControl]="email" />
+        </div>
+
+        <div class="col-12">
+          <label for="description" class="form-label fw-bold text-dark small text-uppercase">
+            Contenido o descripción
+          </label>
+          <textarea 
+            id="description" 
+            class="form-control rounded-3 custom-placeholder" 
+            rows="5" 
+            placeholder="Escribe aquí el resumen o contenido principal..." 
+            [formControl]="description"></textarea>
+        </div>
+
+        <div class="col-12">
+          <label for="tags" class="form-label fw-bold text-dark small text-uppercase">
+            Etiquetas
+          </label>
+          <input 
+            id="tags" 
+            type="text" 
+            class="form-control rounded-3 custom-placeholder" 
+            placeholder="Ejemplo: tecnologia, angular, diseño" 
+            [formControl]="tags" />
+          
+          <div class="d-flex flex-wrap gap-2 mt-2" style="min-height: 1.8rem;">
+            @for (t of (tags.value ?? '').split(','); track $index) {
+              @if (t.trim()) {
+                <span class="badge bg-secondary text-white rounded-pill px-3 py-2 fw-normal">
+                  #{{ t.trim() }}
+                </span>
+              }
+            }
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="p-4 bg-light rounded-4 border border-secondary-subtle">
+            <div class="form-check form-switch d-flex justify-content-between align-items-center ps-0 m-0">
+              <label for="publishNow" class="form-check-label fw-bold text-black">
+                Publicar inmediatamente
+              </label>
+              <input 
+                id="publishNow" 
+                type="checkbox" 
+                class="form-check-input ms-auto fs-5" 
+                role="switch"
+                [formControl]="publishNow" />
+            </div>
+
+            @if (!publishNow.value) {
+              <div class="mt-3 pt-3 border-top border-secondary-subtle">
+                <label for="publishDate" class="form-label fw-bold text-dark small text-uppercase">
+                  Fecha programada
+                </label>
+                <input 
+                  id="publishDate" 
+                  type="date" 
+                  class="form-control rounded-3 custom-placeholder" 
+                  [formControl]="publishDate" />
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="col-12 pt-2">
+          <button type="submit" class="btn btn-primary btn-lg w-100 rounded-3 py-3 fw-bold fs-6">
+            Guardar publicación
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
