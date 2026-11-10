@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ReactiveFormsModule, FormControl } from "@angular/forms";
+import { ReactiveFormsModule, FormControl,FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-blog-form",
@@ -7,25 +7,32 @@ import { ReactiveFormsModule, FormControl } from "@angular/forms";
   templateUrl: "./blog-form.html",
 })
 export class BlogForm {
-  categories = ["Tecnología", "Diseño", "Programación", "Novedades"];
+    categories = ["Tecnología", "Diseño", "Programación", "Novedades"];
 
-  title = new FormControl("");
-  description = new FormControl("");
-  category = new FormControl("");
-  tags = new FormControl("");
-  email = new FormControl("");
-  publishNow = new FormControl(true);
-  publishDate = new FormControl("");
+  BlogFormControl=new FormGroup({
 
+  title : new FormControl(""),
+  description : new FormControl(""),
+  category : new FormControl(""),
+  tags : new FormControl(""),
+  email : new FormControl(""),
+  publishNow : new FormControl(true),
+  publishDate : new FormControl(""),
+  });
   onSubmit() {
-    console.log({
-      title: this.title.value,
-      description: this.description.value,
-      category: this.category.value,
-      tags: this.tags.value,
-      email: this.email.value,
-      publishNow: this.publishNow.value,
-      publishDate: this.publishDate.value,
-    });
+    console.log(this.BlogFormControl.value);
   }
+
+
+ /* formSubmit() {
+      console.log(title: this.title.value);
+      console.log(description: this.description.value);
+      console.log(category: this.category.value);
+      .
+      .
+      .
+      .
+      .
+    });
+  }*/
 }
